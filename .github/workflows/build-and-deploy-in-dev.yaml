@@ -1,0 +1,16 @@
+name: Build and deploy in dev
+on:
+  push:
+    branches: [ "workflow_test" ]
+  pull_request:
+    branches: [ "workflow_test" ]
+
+
+jobs:
+  build-and-deploy-in-dev:
+    uses: a14T2n6g2l59Hgnsmb1Sc4L6CCY7U9XI2cmTor8/cloudhandson-eks-reusable-workflow/.github/workflows/build-and-deploy-in-dev.yaml@workflow_test
+    secrets: inherit
+    with:
+      CLUSTER_NAME: "mpft"
+      APPLICATION_ENV: "dev"
+    #      GIT_PRIVATE_TOKEN: ${{ secrets.GIT_PRIVATE_TOKEN }}
