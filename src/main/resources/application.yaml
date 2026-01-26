@@ -3,7 +3,7 @@ spring:
     name: s3-connection
 
   r2dbc:
-    name: s3_connection
+    name: mpft
     url: r2dbc:postgresql://localhost:5432
     username: mpft
     password: mpft
@@ -13,4 +13,3 @@ spring:
 
 server:
   port: 8083
-

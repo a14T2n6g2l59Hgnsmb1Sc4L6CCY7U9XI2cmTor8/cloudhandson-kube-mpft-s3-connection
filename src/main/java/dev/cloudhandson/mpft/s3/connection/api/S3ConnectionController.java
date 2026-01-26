@@ -1,5 +1,7 @@
 package dev.cloudhandson.mpft.s3.connection.api;
 
+import dev.cloudhandson.mpft.s3.connection.api.model.OnCreate;
+import dev.cloudhandson.mpft.s3.connection.api.model.OnUpdate;
 import dev.cloudhandson.mpft.s3.connection.api.model.S3ConnectionRequest;
 import dev.cloudhandson.mpft.s3.connection.service.S3ConnectionService;
 import dev.cloudhandson.mpft.s3.model.S3ConnectionRest;
@@ -8,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,7 +33,7 @@ public class S3ConnectionController {
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<ResponseEntity<S3ConnectionRest>> createS3Connection(@RequestBody Mono<S3ConnectionRequest> s3ConnectionRequestMono) {
+    public Mono<ResponseEntity<S3ConnectionRest>> createS3Connection(@RequestBody @Validated(OnCreate.class) Mono<S3ConnectionRequest> s3ConnectionRequestMono) {
         LOGGER.info("Incoming Create S3 Connection request");
         return s3ConnectionService
             .createS3Connection(s3ConnectionRequestMono)
@@ -61,7 +64,7 @@ public class S3ConnectionController {
     }
 
     @PutMapping(value = "/{connectionId}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<ResponseEntity<S3ConnectionRest>> updateS3Connection(@PathVariable("connectionId") UUID connectionId, @RequestBody Mono<S3ConnectionRequest> s3ConnectionRequestMono) {
+    public Mono<ResponseEntity<S3ConnectionRest>> updateS3Connection(@PathVariable("connectionId") UUID connectionId, @RequestBody @Validated(OnUpdate.class) Mono<S3ConnectionRequest> s3ConnectionRequestMono) {
         LOGGER.info("Incoming Update S3 Connection request for S3 Connection with connectionId: {}", connectionId);
         return s3ConnectionService
             .updateS3Connection(connectionId, s3ConnectionRequestMono)
@@ -69,6 +72,7 @@ public class S3ConnectionController {
                 .status(HttpStatus.OK)
                 .location(URI.create(API_V1_S3_CONNECTIONS + "/" + s3ConnectionRest.getConnectionId()))
                 .body(s3ConnectionRest));
+
     }
 
     @DeleteMapping(value = "/{connectionId}", produces = {MediaType.APPLICATION_JSON_VALUE})

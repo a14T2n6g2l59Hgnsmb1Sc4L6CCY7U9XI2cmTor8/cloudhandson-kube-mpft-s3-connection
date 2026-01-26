@@ -1,11 +1,20 @@
 package dev.cloudhandson.mpft.s3.connection.api.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class S3ConnectionRequest {
 
+    @NotBlank(message = "Connection Name is mandatory", groups = {OnCreate.class})
+    @Size(min = 4, max = 50)
     private String connectionName;
 
+    @NotBlank(message = "Session Name is mandatory", groups = {OnCreate.class, OnUpdate.class})
+    @Size(min = 10, max = 50)
     private String sessionName;
 
+    @NotBlank(message = "Region is mandatory", groups = {OnCreate.class, OnUpdate.class})
+    @Size(min = 6, max = 30)
     private String region;
 
     private String iamRoleArn;
