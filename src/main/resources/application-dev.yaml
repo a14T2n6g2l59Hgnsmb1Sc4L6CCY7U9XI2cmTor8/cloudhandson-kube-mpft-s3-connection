@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: s3-connection
+
+  r2dbc:
+    name: ${db_name}
+    url: ${db_host_url}
+    username: ${db_username}
+    password: ${db_password}
+  sql:
+    init:
+      mode: embedded
+
+server:
+  port: 8080
+

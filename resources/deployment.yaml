@@ -27,6 +27,12 @@ spec:
             - containerPort: 8080
               name: http
               protocol: TCP
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: ${CLUSTER_ENV}
+          envFrom:
+            - secretRef:
+                name: app-secrets
           resources:
             limits:
               cpu: 1024m
