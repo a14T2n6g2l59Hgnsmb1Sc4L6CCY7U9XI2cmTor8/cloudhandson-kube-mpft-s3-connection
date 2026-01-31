@@ -3,4 +3,6 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - resources/externalSecret.yaml
+  - resources/deployment.yaml
+  - resources/service.yaml
 #  - resources/virtualService.yaml
