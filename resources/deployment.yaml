@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APPLICATION_NAME}
+  namespace: ${APPLICATION_NAMESPACE}
+  labels:
+    app: ${APPLICATION_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${APPLICATION_NAME}
+  template:
+    metadata:
+      name: ${APPLICATION_NAME}
+      labels:
+        app: ${APPLICATION_NAME}
+    spec:
+      containers:
+        - name: ${APPLICATION_NAME}
+          image: 263529367083.dkr.ecr.ap-south-1.amazonaws.com/eks/dev/mpft/s3-connection/s3-connection
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8443
+              name: https
+              protocol: TCP
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1024m
+              memory: 2Gi
+            requests:
+              cpu: 1024m
+              memory: 2Gi
+      restartPolicy: Always
+      
