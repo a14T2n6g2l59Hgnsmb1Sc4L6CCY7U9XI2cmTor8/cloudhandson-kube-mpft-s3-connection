@@ -16,6 +16,7 @@ spec:
       labels:
         app: ${APPLICATION_NAME}
     spec:
+      serviceAccountName: ${APPLICATION_NAME}
       containers:
         - name: ${APPLICATION_NAME}
           image: 263529367083.dkr.ecr.ap-south-1.amazonaws.com/eks/dev/mpft/s3-connection/s3-connection
