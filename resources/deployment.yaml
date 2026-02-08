@@ -54,4 +54,3 @@ spec:
           persistentVolumeClaim:
             claimName: ${APPLICATION_NAME}-data-efs-pvc
       restartPolicy: Always
-      
