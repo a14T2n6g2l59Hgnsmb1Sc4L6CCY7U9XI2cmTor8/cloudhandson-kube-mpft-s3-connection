@@ -5,4 +5,5 @@ resources:
   - resources/externalSecret.yaml
   - resources/deployment.yaml
   - resources/service.yaml
+  - resources/ingress.yaml
 #  - resources/virtualService.yaml
