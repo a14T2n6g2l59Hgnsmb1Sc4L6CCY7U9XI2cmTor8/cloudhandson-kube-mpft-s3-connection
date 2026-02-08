@@ -19,7 +19,7 @@ spec:
       serviceAccountName: ${APPLICATION_NAME}
       containers:
         - name: ${APPLICATION_NAME}
-          image: 263529367083.dkr.ecr.ap-south-1.amazonaws.com/eks/dev/mpft/s3-connection/s3-connection
+          image: 263529367083.dkr.ecr.ap-south-1.amazonaws.com/eks/dev/mpft/${APPLICATION_NAMESPACE}/${APPLICATION_NAME}
           imagePullPolicy: Always
           ports:
             - containerPort: 8443
@@ -28,6 +28,11 @@ spec:
             - containerPort: 8080
               name: http
               protocol: TCP
+          volumeMounts:
+            - name: splunk-efs-storage
+              mountPath: /splunk
+            - name: data-efs-storage
+              mountPath: /data
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: ${CLUSTER_ENV}
@@ -41,5 +46,12 @@ spec:
             requests:
               cpu: 1024m
               memory: 2Gi
+      volumes:
+        - name: splunk-efs-storage
+          persistentVolumeClaim:
+            claimName: ${APPLICATION_NAME}-splunk-efs-pvc
+        - name: data-efs-storage
+          persistentVolumeClaim:
+            claimName: ${APPLICATION_NAME}-data-efs-pvc
       restartPolicy: Always
       
