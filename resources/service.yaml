@@ -8,6 +8,7 @@ metadata:
 spec:
   selector:
     app: ${APPLICATION_NAME}
+  type: ClusterIP
   ports:
     - name: https
       port: 8443
@@ -17,5 +18,4 @@ spec:
       port: 8080
       protocol: TCP
       targetPort: http
-  type: LoadBalancer
   sessionAffinity: None
