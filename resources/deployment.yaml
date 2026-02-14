@@ -41,8 +41,8 @@ spec:
                 name: app-secrets
           resources:
             limits:
-              cpu: 1024m
-              memory: 2Gi
+              cpu: 1536m
+              memory: 2.5Gi
             requests:
               cpu: 1024m
               memory: 2Gi
