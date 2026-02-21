@@ -19,7 +19,7 @@ spec:
       serviceAccountName: ${APPLICATION_NAME}
       containers:
         - name: ${APPLICATION_NAME}
-          image: ${ECR_REGISTRY}/eks/${CLUSTER_ENV}/${CLUSTER_NAME}/${APPLICATION_NAMESPACE}/${APPLICATION_NAME}:${IMAGE_TAG}
+          image: 263529367083.dkr.ecr.ap-south-1.amazonaws.com/eks/${CLUSTER_ENV}/${CLUSTER_NAME}/${APPLICATION_NAMESPACE}/${APPLICATION_NAME}:${IMAGE_TAG}
           imagePullPolicy: Always
           ports:
             - containerPort: 8443
